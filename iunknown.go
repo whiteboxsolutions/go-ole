@@ -4,6 +4,7 @@ import "unsafe"
 
 type IUnknown struct {
 	RawVTable *interface{}
+	LpVtbl    *[1024]uintptr
 }
 
 type IUnknownVtbl struct {
