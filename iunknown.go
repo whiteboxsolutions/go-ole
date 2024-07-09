@@ -58,10 +58,10 @@ func (v *IUnknown) MustQueryInterface(iid *GUID) (disp *IDispatch) {
 	return unk
 }
 
-func (v *IUnknown) AddRef() int32 {
+func (v *IUnknown) AddRef() uintptr {
 	return addRef(v)
 }
 
-func (v *IUnknown) Release() int32 {
+func (v *IUnknown) Release() uintptr {
 	return release(v)
 }

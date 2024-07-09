@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package ole
@@ -37,22 +38,22 @@ func queryInterface(unk *IUnknown, iid *GUID) (disp *IDispatch, err error) {
 	return
 }
 
-func addRef(unk *IUnknown) int32 {
+func addRef(unk *IUnknown) uintptr {
 	ret, _, _ := syscall.Syscall(
 		unk.VTable().AddRef,
 		1,
 		uintptr(unsafe.Pointer(unk)),
 		0,
 		0)
-	return int32(ret)
+	return ret
 }
 
-func release(unk *IUnknown) int32 {
+func release(unk *IUnknown) uintptr {
 	ret, _, _ := syscall.Syscall(
 		unk.VTable().Release,
 		1,
 		uintptr(unsafe.Pointer(unk)),
 		0,
 		0)
-	return int32(ret)
+	return ret
 }
