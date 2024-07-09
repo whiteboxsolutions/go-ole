@@ -6,7 +6,8 @@ import (
 )
 
 type IUnknown struct {
-	RawVTable *[1024]uintptr
+	// RawVTable *[1024]uintptr
+	RawVTable *interface{}
 }
 
 type IUnknownVtbl struct {
