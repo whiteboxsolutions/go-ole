@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package ole
@@ -9,7 +10,7 @@ import (
 
 func (v *IConnectionPoint) GetConnectionInterface(piid **GUID) int32 {
 	// XXX: This doesn't look like it does what it's supposed to
-	return release((*IUnknown)(unsafe.Pointer(v)))
+	return int32(release((*IUnknown)(unsafe.Pointer(v))))
 }
 
 func (v *IConnectionPoint) Advise(unknown *IUnknown) (cookie uint32, err error) {
