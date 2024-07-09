@@ -1,10 +1,12 @@
 package ole
 
-import "unsafe"
+import (
+	"syscall"
+	"unsafe"
+)
 
 type IUnknown struct {
-	RawVTable *interface{}
-	LpVtbl    *[1024]uintptr
+	RawVTable *[1024]uintptr
 }
 
 type IUnknownVtbl struct {
@@ -17,6 +19,12 @@ type UnknownLike interface {
 	QueryInterface(iid *GUID) (disp *IDispatch, err error)
 	AddRef() int32
 	Release() int32
+}
+
+type IUnknownInterface interface {
+	QueryInterface(riid *syscall.GUID, ppvObject unsafe.Pointer) HRESULT
+	AddRef() uint32
+	Release() uint32
 }
 
 func (v *IUnknown) VTable() *IUnknownVtbl {
